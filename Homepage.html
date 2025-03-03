@@ -23,25 +23,35 @@
 
         /* Sticky header */
         .header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 15px 20px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed; /* Make it stick to the top */
-    top: 0;
-    left: 0;
-    z-index: 1000; /* Ensures it stays on top */
-}
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed; /* Make it stick to the top */
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensures it stays on top */
+        }
 
-.logo {
-    height: 50px; /* Adjust size */
-    cursor: pointer; /* Makes it clear it's clickable */
-}
+        .logo {
+            height: 50px; /* Adjust size */
+            cursor: pointer; /* Makes it clear it's clickable */
+        }
 
         .header img {
             height: 40px;
+        }
+
+        /* Add a new image in the header aligned to the right */
+        .header .profile-link {
+            margin-left: auto; /* Pushes it to the right */
+        }
+
+        .profile-link img {
+            height: 40px; /* Adjust the size of the profile image */
+            cursor: pointer;
         }
 
         /* Main container */
@@ -75,16 +85,19 @@
 <body>
 
     <div class="header">
-    <a href="profile.html">
-        <img src="logo.png" class="logo" alt="DopaVerse Logo">
-    </a>
-</div>
-
+      
+            <img src="logo.png" class="logo" alt="DopaVerse Logo">
+        
+        <!-- Add new image for profile link on the right -->
+        <a href="profile.html" class="profile-link">
+            <img src="profile-icon.png" alt="Profile Icon">
+        </a>
+    </div>
 
     <div class="container">
         <button class="button">Play Game</button>
         <button class="button">Calendar</button>
-        <button class="button">Profile</button>
+      
     </div>
 
 </body>

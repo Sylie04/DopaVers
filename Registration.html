@@ -13,10 +13,15 @@
         }
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #FFA500;
+        }
+        .logo {
+            width: 120px;
+            margin-bottom: 20px;
         }
         .container {
             width: 350px;
@@ -28,6 +33,7 @@
         }
         h2 {
             margin-bottom: 20px;
+            color: #FFA500;
         }
         input {
             width: 100%;
@@ -39,19 +45,19 @@
         button {
             width: 100%;
             padding: 10px;
-            background: #007bff;
+            background: #FFA500;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
         button:hover {
-            background: #0056b3;
+            background: #cc8400;
         }
         .toggle {
             margin-top: 10px;
             cursor: pointer;
-            color: #007bff;
+            color: #FFA500;
         }
         .toggle:hover {
             text-decoration: underline;
@@ -62,6 +68,7 @@
     </style>
 </head>
 <body>
+    <img src="Picture1.jpg" class="logo" alt="DopaVerse Logo">
     <div class="container">
         <h2 id="form-title">Login</h2>
         
@@ -103,4 +110,3 @@
     </script>
 </body>
 </html>
-

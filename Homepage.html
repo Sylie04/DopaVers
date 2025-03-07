@@ -59,13 +59,14 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+            justify-content: center;
             width: 90%;
             gap: 20px;
             margin-top: 80px; /* Prevent overlap with header */
         }
 
         .button {
-            width: 50%;
+            width: 200px;
             height: 200px;
             padding: 15px;
             background-color: #ff7f00;
@@ -75,18 +76,30 @@
             font-size: 18px;
             cursor: pointer;
             transition: background 0.3s;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none; /* Ensures text inside the button is not underlined */
         }
 
         .button:hover {
             background-color: #e66b00;
+        }
+
+        /* Ensure anchor behaves like button */
+        .button-link {
+            text-decoration: none;
+            width: 200px;
+            height: 200px;
+            display: flex;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-      
-            <img src="Picture1.jpg" class="logo" alt="DopaVerse Logo">
+        <img src="Picture1.jpg" class="logo" alt="DopaVerse Logo">
         
         <!-- Add new image for profile link on the right -->
         <a href="Profilepage.html" class="profile-link">
@@ -96,8 +109,9 @@
 
     <div class="container">
         <button class="button">Play Game</button>
-       <a href="index.html"> <button class="button">Calendar</button></a>
-      
+        <a href="index.html" class="button-link">
+            <div class="button">Calendar</div>
+        </a>
     </div>
 
 </body>

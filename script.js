@@ -417,11 +417,11 @@ addEventSubmit.addEventListener("click", () => {
     activeDayEl.classList.add("event");
   }
 });
-
+/*
 //function to delete event when clicked on event
 eventsContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("event")) {
-    if (confirm("Are you sure you want to Check this event?")) {
+    if ( confirm("Are you sure you want to delete this task?")) {
       const eventTitle = e.target.children[0].children[1].innerHTML;
       eventsArr.forEach((event) => {
         if (
@@ -447,9 +447,10 @@ eventsContainer.addEventListener("click", (e) => {
       });
       updateEvents(activeDay);
     }
+
   }
 });
-
+*/
 //function to save events in local storage
 function saveEvents() {
   localStorage.setItem("events", JSON.stringify(eventsArr));
@@ -473,4 +474,26 @@ function convertTime(time) {
   timeHour = timeHour % 12 || 12;
   time = timeHour + ":" + timeMin + " " + timeFormat;
   return time;
+}
+
+function updateEvents(date) {
+  let events = "";
+  eventsArr.forEach(event => {
+    if (date === event.day && month + 1 === event.month && year === event.year) {
+      event.events.forEach(event => {
+        events += `<div class="event" onclick="markEventCompleted(this)"><div class="title"><i class="fas fa-circle"></i><h3 class="event-title">${event.title}</h3></div><div class="event-time"><span class="event-time">${event.time}</span></div></div>`;
+      });
+    }
+  });
+  eventsContainer.innerHTML = events || `<div class="no-event"><h3>No Events</h3></div>`;
+  saveEvents();
+}
+
+function markEventCompleted(eventElement) {
+  eventElement.classList.toggle("completed");
+  if (eventElement.classList.contains("completed")) {
+    eventElement.style.backgroundColor = "#90EE90";
+  } else {
+    eventElement.style.backgroundColor = "";
+  }
 }

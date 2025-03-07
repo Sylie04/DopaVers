@@ -21,79 +21,131 @@
             height: 100vh;
         }
 
-        /* Sticky header */
+        /* Bigger Sticky Header */
         .header {
             width: 100%;
             display: flex;
             align-items: center;
             background: white;
-            padding: 15px 20px;
+            padding: 20px 30px;
             box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed; /* Make it stick to the top */
+            position: fixed;
             top: 0;
             left: 0;
-            z-index: 1000; /* Ensures it stays on top */
+            z-index: 1000;
+            height: 80px;
         }
 
         .logo {
-            height: 50px; /* Adjust size */
-            cursor: pointer; /* Makes it clear it's clickable */
+            height: 80px;
         }
 
-        .header img {
-            height: 40px;
+        /* Profile & Calendar Icons */
+        .header .icons {
+            margin-left: auto;
+            display: flex;
+            gap: 20px;
         }
 
-        /* Add a new image in the header aligned to the right */
-        .header .profile-link {
-            margin-left: auto; /* Pushes it to the right */
-        }
-
-        .profile-link img {
-            height: 40px; /* Adjust the size of the profile image */
+        .icons img {
+            height: 50px;
             cursor: pointer;
         }
 
         /* Main container */
-        .container {
+        .main-container {
             display: flex;
-            flex-direction: row;
             align-items: center;
             justify-content: center;
-            width: 90%;
-            gap: 20px;
-            margin-top: 80px; /* Prevent overlap with header */
+            gap: 20px; /* Space between buttons and video */
+            width: 100%;
+            margin-top: 120px;
         }
 
-        .button {
+        /* Buttons container */
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Play Game Button (With Fun Hover Effect) */
+        .play-game {
             width: 200px;
             height: 200px;
-            padding: 15px;
             background-color: #ff7f00;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 18px;
             cursor: pointer;
-            transition: background 0.3s;
-            text-align: center;
+            transition: all 0.3s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none; /* Ensures text inside the button is not underlined */
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .button:hover {
+        /* Dynamic Hover Effects */
+        .play-game:hover {
+            transform: scale(1.1) rotate(3deg); /* Grows & Slight Rotation */
             background-color: #e66b00;
+            box-shadow: 0px 6px 15px rgba(255, 127, 0, 0.6); /* Glow effect */
+            animation: bounce 0.5s infinite alternate ease-in-out;
         }
 
-        /* Ensure anchor behaves like button */
-        .button-link {
-            text-decoration: none;
-            width: 200px;
-            height: 200px;
-            display: flex;
+        /* Bouncing Animation */
+        @keyframes bounce {
+            from {
+                transform: scale(1.1) translateY(0);
+            }
+            to {
+                transform: scale(1.1) translateY(-8px);
+            }
         }
+
+        /* View Demo Button */
+        .view-demo {
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid #ff7f00;
+            color: black;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .view-demo:hover {
+            background: #ff7f00;
+            color: white;
+        }
+
+        /* Video Iframe */
+        .video-container {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: calc(50% + 180px); /* Places it next to the calendar button */
+            transform: translateY(-50%);
+            width: 400px;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            background: black;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
     </style>
 </head>
 <body>
@@ -101,20 +153,43 @@
     <div class="header">
         <img src="Picture1.jpg" class="logo" alt="DopaVerse Logo">
         
-        <!-- Add new image for profile link on the right -->
-        <a href="Profilepage.html" class="profile-link">
-            <img src="profile.webp" alt="Profile Icon">
-            <a href="index.html" class="profile-link">
-                <img src="calender.png" alt="Profile Icon">
-        </a>
+        <!-- Profile & Calendar Icons -->
+        <div class="icons">
+            <a href="Profilepage.html">
+                <img src="profile.webp" alt="Profile Icon">
+            </a>
+            <a href="index.html">
+                <img src="calender.png" alt="Calendar Icon">
+            </a>
+        </div>
     </div>
 
-    <div class="container">
-        <button class="button">Play Game</button>
-        <a href="index.html" class="button-link">
-            <div class="button">Calendar</div>
-        </a>
+    <div class="main-container">
+        <!-- Buttons Section -->
+        <div class="buttons-container">
+            <button class="play-game">Play Game</button>
+            <button class="view-demo" onmouseover="showVideo()" onmouseleave="hideVideo()">View Demo</button>
+        </div>
+
+        <!-- Video Section (Appears on Hover) -->
+        <div class="video-container" id="videoBox">
+            <iframe 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="Demo Video" 
+                allowfullscreen>
+            </iframe>
+        </div>
     </div>
+
+    <script>
+        function showVideo() {
+            document.getElementById("videoBox").style.display = "block";
+        }
+
+        function hideVideo() {
+            document.getElementById("videoBox").style.display = "none";
+        }
+    </script>
 
 </body>
 </html>

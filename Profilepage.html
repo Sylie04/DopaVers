@@ -11,6 +11,7 @@
             padding: 0;
             font-family: Arial, sans-serif;
         }
+
         body {
             display: flex;
             flex-direction: column;
@@ -19,21 +20,38 @@
             height: 100vh;
             background-color: #f8c470;
         }
+
+        /* Same Header as Homepage */
         .header {
             width: 100%;
             display: flex;
             align-items: center;
             background: white;
-            padding: 15px 20px;
+            padding: 20px 30px;
             box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
             left: 0;
             z-index: 1000;
+            height: 80px;
         }
+
         .logo {
-            width: 80px;
+            height: 80px;
         }
+
+        /* Profile & Calendar Icons */
+        .header .icons {
+            margin-left: auto;
+            display: flex;
+            gap: 20px;
+        }
+
+        .icons img {
+            height: 50px;
+            cursor: pointer;
+        }
+
         .profile-container {
             background: white;
             padding: 20px;
@@ -43,11 +61,13 @@
             max-width: 400px;
             text-align: center;
             font-size: 1.2rem;
-            margin-top: 100px; /* Ensures it doesn't cover the header */
+            margin-top: 120px; /* Adjusted to fit new header size */
         }
+
         .profile-container p {
             margin: 10px 0;
         }
+
         .profile-container input, .profile-container select {
             width: 100%;
             padding: 10px;
@@ -57,30 +77,43 @@
             font-size: 1rem;
             display: none;
         }
+
         .profile-container button {
             width: 100%;
             margin-top: 15px;
             padding: 12px;
             border: none;
-            background: #ff7f00; /* Changed button color to orange */
+            background: #ff7f00; /* Changed button color to match homepage */
             color: white;
             border-radius: 4px;
             cursor: pointer;
             font-size: 1rem;
             transition: background 0.3s;
         }
+
         .profile-container button:hover {
             background: #e66b00;
         }
     </style>
 </head>
 <body>
+
     <div class="header">
         <a href="Homepage.html">
             <img src="Picture1.jpg" class="logo" alt="DopaVerse Logo">
         </a>
+        
+        <!-- Profile & Calendar Icons -->
+        <div class="icons">
+            <a href="Profilepage.html">
+                <img src="profile.webp" alt="Profile Icon">
+            </a>
+            <a href="index.html">
+                <img src="calender.png" alt="Calendar Icon">
+            </a>
+        </div>
     </div>
-    
+
     <div class="profile-container">
         <h2>User Profile</h2>
         
@@ -155,5 +188,6 @@
             document.getElementById("save-btn").style.display = "none";
         }
     </script>
+
 </body>
 </html>

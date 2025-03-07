@@ -17,7 +17,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f8c470; /* Changed to white */
+            background-color: #f8c470;
         }
         .header {
             width: 100%;
@@ -26,153 +26,131 @@
             background: white;
             padding: 15px 20px;
             box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
+            z-index: 1000;
         }
         .logo {
-            width: 100px;
-        }
-        .container {
-            width: 400px;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 80px;
-        }
-        h2 {
-            margin-bottom: 20px;
-            color: #FFA500;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-         #save-btn, #edit-btn  {
-            width: 100%;
-            padding: 10px;
-            background: #FFA500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #save-btn:hover, #edit-btn:hover {
-            background: #f1a64f;
-        }
-        .toggle {
-            margin-top: 10px;
-            cursor: pointer;
-            color: #FFA500;
-        }
-        .toggle:hover {
-            text-decoration: underline;
-        }
-        .hidden {
-            display: none;
-        }
-        .footer {
-            position: absolute;
-            bottom: 10px;
-            text-align: center;
-            color: #555;
+            width: 80px;
         }
         .profile-container {
             background: white;
-            padding: 40px; /* Increased padding */
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 80%; /* Increased width */
-            max-width: 600px; /* Added max-width for better responsiveness */
+            width: 90%;
+            max-width: 400px;
             text-align: center;
-            font-size: 2rem; /* Increased font size */
+            font-size: 1.2rem;
+            margin-top: 100px; /* Ensures it doesn't cover the header */
         }
-        .profile-container input {
+        .profile-container p {
+            margin: 10px 0;
+        }
+        .profile-container input, .profile-container select {
             width: 100%;
-            padding: 15px; /* Increased padding */
-            margin: 10px 0; /* Increased margin */
+            padding: 10px;
+            margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
+            font-size: 1rem;
             display: none;
-            font-size: 1.5rem; /* Increased font size */
         }
         .profile-container button {
-            margin-top: 20px; /* Increased margin */
-            padding: 15px; /* Increased padding */
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
             border: none;
-            background: #007bff;
+            background: #ff7f00; /* Changed button color to orange */
             color: white;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 1.5rem; /* Increased font size */
+            font-size: 1rem;
+            transition: background 0.3s;
         }
         .profile-container button:hover {
-            background: #0056b3;
+            background: #e66b00;
         }
     </style>
 </head>
 <body>
     <div class="header">
-           <a href="Homepage.html" class="profile-link">
-             <img src="Picture1.jpg" class="logo" alt="DopaVerse Logo">
+        <a href="Homepage.html">
+            <img src="Picture1.jpg" class="logo" alt="DopaVerse Logo">
         </a>
     </div>
     
     <div class="profile-container">
         <h2>User Profile</h2>
+        
         <p><strong>Name:</strong> <span id="name-display">John Doe</span></p>
         <input type="text" id="name-input">
-        
+
         <p><strong>Age:</strong> <span id="age-display">25</span></p>
         <input type="number" id="age-input">
-        
+
         <p><strong>Gender:</strong> <span id="gender-display">Male</span></p>
-        <select id="gender-input" style="display: none;">
+        <select id="gender-input">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
-           
         </select>
-        
+
+        <p><strong>Severity of Condition:</strong> <span id="severity-display">Mild</span></p>
+        <select id="severity-input">
+            <option value="Mild">Mild</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Severe">Severe</option>
+        </select>
+
         <button onclick="editProfile()" id="edit-btn">Edit</button>
         <button onclick="saveProfile()" id="save-btn" style="display: none;">Save</button>
     </div>
   
     <script>
         function editProfile() {
+            // Show input fields and hide display text
             document.getElementById("name-input").style.display = "block";
             document.getElementById("age-input").style.display = "block";
             document.getElementById("gender-input").style.display = "block";
-            
+            document.getElementById("severity-input").style.display = "block";
+
+            // Fill input values with current text values
             document.getElementById("name-input").value = document.getElementById("name-display").innerText;
             document.getElementById("age-input").value = document.getElementById("age-display").innerText;
             document.getElementById("gender-input").value = document.getElementById("gender-display").innerText;
-            
+            document.getElementById("severity-input").value = document.getElementById("severity-display").innerText;
+
+            // Hide text and show input fields
             document.getElementById("name-display").style.display = "none";
             document.getElementById("age-display").style.display = "none";
             document.getElementById("gender-display").style.display = "none";
-            
+            document.getElementById("severity-display").style.display = "none";
+
+            // Toggle buttons
             document.getElementById("edit-btn").style.display = "none";
             document.getElementById("save-btn").style.display = "block";
         }
 
         function saveProfile() {
+            // Save new values
             document.getElementById("name-display").innerText = document.getElementById("name-input").value;
             document.getElementById("age-display").innerText = document.getElementById("age-input").value;
             document.getElementById("gender-display").innerText = document.getElementById("gender-input").value;
-            
+            document.getElementById("severity-display").innerText = document.getElementById("severity-input").value;
+
+            // Hide input fields and show text values
             document.getElementById("name-input").style.display = "none";
             document.getElementById("age-input").style.display = "none";
             document.getElementById("gender-input").style.display = "none";
-            
+            document.getElementById("severity-input").style.display = "none";
+
             document.getElementById("name-display").style.display = "inline";
             document.getElementById("age-display").style.display = "inline";
             document.getElementById("gender-display").style.display = "inline";
-            
+            document.getElementById("severity-display").style.display = "inline";
+
+            // Toggle buttons
             document.getElementById("edit-btn").style.display = "block";
             document.getElementById("save-btn").style.display = "none";
         }

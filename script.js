@@ -240,33 +240,49 @@ function getActiveDay(date) {
 //function update events when a day is active
 function updateEvents(date) {
   let events = "";
-  eventsArr.forEach((event) => {
-    if (
-      date === event.day &&
-      month + 1 === event.month &&
-      year === event.year
-    ) {
-      event.events.forEach((event) => {
-        events += `<div class="event">
-            <div class="title">
+  eventsArr.forEach((event, eventIndex) => {
+    if (date === event.day && month + 1 === event.month && year === event.year) {
+      event.events.forEach((event, index) => {
+        events += `
+          <div class="event">
+            <div class="title" onclick="markEventCompleted(this)">
               <i class="fas fa-circle"></i>
               <h3 class="event-title">${event.title}</h3>
             </div>
             <div class="event-time">
               <span class="event-time">${event.time}</span>
             </div>
-        </div>`;
+            <button class="delete-event-btn" onclick="deleteEvent(${eventIndex}, ${index})">Delete</button>
+          </div>`;
       });
     }
   });
-  if (events === "") {
-    events = `<div class="no-event">
-            <h3>No Events</h3>
-        </div>`;
-  }
-  eventsContainer.innerHTML = events;
+
+  eventsContainer.innerHTML = events || `<div class="no-event"><h3>No Events</h3></div>`;
   saveEvents();
 }
+
+
+
+function deleteEvent(eventIndex, eventSubIndex) {
+  if (confirm("Are you sure you want to delete this event?")) {
+    eventsArr[eventIndex].events.splice(eventSubIndex, 1);
+
+    // Remove the day from eventsArr if no more events exist
+    if (eventsArr[eventIndex].events.length === 0) {
+      eventsArr.splice(eventIndex, 1);
+      const activeDayEl = document.querySelector(".day.active");
+      if (activeDayEl && activeDayEl.classList.contains("event")) {
+        activeDayEl.classList.remove("event");
+      }
+    }
+
+    updateEvents(activeDay);
+  }
+}
+
+
+
 
 //function to add event
 addEventBtn.addEventListener("click", () => {
@@ -492,8 +508,10 @@ function updateEvents(date) {
 function markEventCompleted(eventElement) {
   eventElement.classList.toggle("completed");
   if (eventElement.classList.contains("completed")) {
-    eventElement.style.backgroundColor = "#90EE90";
+    eventElement.style.backgroundColor = "#90EE90"; // Light green
+    eventElement.style.textDecoration = "line-through"; // Strike-through for completed events
   } else {
     eventElement.style.backgroundColor = "";
+    eventElement.style.textDecoration = "none";
   }
 }

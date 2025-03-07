@@ -1,5 +1,5 @@
 :root {
-  --primary-clr: #b38add;
+  --primary-clr: #ff7f00;
 }
 * {
   margin: 0;
@@ -39,7 +39,7 @@ body {
   display: flex;
 
   border-radius: 10px;
-  background-color: #373c4f;
+  background-color: #f8c470;
 }
 .left {
   width: 60%;
@@ -53,7 +53,7 @@ body {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
-  color: #878895;
+  color: #333;
   border-radius: 5px;
   background-color: #fff;
 }
@@ -316,7 +316,7 @@ body {
   font-size: 0.5rem;
 }
 .events .event:hover i {
-  color: #fff;
+  color: #ff7f00;
 }
 .events .event .event-time {
   font-size: 0.8rem;
@@ -356,8 +356,8 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  color: #878895;
-  border: 2px solid #878895;
+  color: #000000;
+  border: 2px solid #f68019;
   opacity: 0.5;
   border-radius: 50%;
   background-color: transparent;
@@ -546,7 +546,7 @@ body {
   padding: 10px;
   font-size: 12px;
   color: #fff;
-  background-color: #b38add;
+  background-color: #ff7f00;
 }
 .credits a {
   color: #fff;
@@ -555,4 +555,22 @@ body {
 }
 .credits a:hover {
   text-decoration: underline;
+}
+.delete-event-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.delete-event-btn:hover {
+  background-color: darkred;
+}
+
+.completed {
+  opacity: 0.6;
 }

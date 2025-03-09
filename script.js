@@ -242,25 +242,31 @@ function updateEvents(date) {
   let events = "";
   eventsArr.forEach((event, eventIndex) => {
     if (date === event.day && month + 1 === event.month && year === event.year) {
-      event.events.forEach((event, index) => {
+      event.events.forEach((event, eventSubIndex) => {
         events += `
-          <div class="event">
-            <div class="title" onclick="markEventCompleted(this)">
+          <div class="event" 
+               onclick="markEventCompleted(this)"
+               oncontextmenu="deleteEvent(${eventIndex}, ${eventSubIndex}); return false;" 
+               style="cursor: pointer; padding: 10px; border-bottom: 1px solid #ccc;">
+            <div class="title">
               <i class="fas fa-circle"></i>
               <h3 class="event-title">${event.title}</h3>
             </div>
             <div class="event-time">
               <span class="event-time">${event.time}</span>
             </div>
-            <button class="delete-event-btn" onclick="deleteEvent(${eventIndex}, ${index})">Delete</button>
           </div>`;
       });
     }
   });
 
   eventsContainer.innerHTML = events || `<div class="no-event"><h3>No Events</h3></div>`;
-  saveEvents();
 }
+
+
+
+
+
 
 
 
@@ -268,18 +274,21 @@ function deleteEvent(eventIndex, eventSubIndex) {
   if (confirm("Are you sure you want to delete this event?")) {
     eventsArr[eventIndex].events.splice(eventSubIndex, 1);
 
-    // Remove the day from eventsArr if no more events exist
     if (eventsArr[eventIndex].events.length === 0) {
       eventsArr.splice(eventIndex, 1);
+
       const activeDayEl = document.querySelector(".day.active");
       if (activeDayEl && activeDayEl.classList.contains("event")) {
         activeDayEl.classList.remove("event");
       }
     }
 
+    saveEvents();
     updateEvents(activeDay);
   }
 }
+
+
 
 
 
@@ -304,25 +313,7 @@ addEventTitle.addEventListener("input", (e) => {
   addEventTitle.value = addEventTitle.value.slice(0, 60);
 });
 
-function defineProperty() {
-  var osccred = document.createElement("div");
-  osccred.innerHTML =
-    "A Project By <a href='https://www.youtube.com/channel/UCiUtBDVaSmMGKxg1HYeK-BQ' target=_blank>Open Source Coding</a>";
-  osccred.style.position = "absolute";
-  osccred.style.bottom = "0";
-  osccred.style.right = "0";
-  osccred.style.fontSize = "10px";
-  osccred.style.color = "#ccc";
-  osccred.style.fontFamily = "sans-serif";
-  osccred.style.padding = "5px";
-  osccred.style.background = "#fff";
-  osccred.style.borderTopLeftRadius = "5px";
-  osccred.style.borderBottomRightRadius = "5px";
-  osccred.style.boxShadow = "0 0 5px #ccc";
-  document.body.appendChild(osccred);
-}
 
-defineProperty();
 
 //allow only time in eventtime from and to
 addEventFrom.addEventListener("input", (e) => {
@@ -433,40 +424,45 @@ addEventSubmit.addEventListener("click", () => {
     activeDayEl.classList.add("event");
   }
 });
-/*
+
 //function to delete event when clicked on event
-eventsContainer.addEventListener("click", (e) => {
-  if (e.target.classList.contains("event")) {
-    if ( confirm("Are you sure you want to delete this task?")) {
-      const eventTitle = e.target.children[0].children[1].innerHTML;
-      eventsArr.forEach((event) => {
+eventsContainer.addEventListener("dblclick", (e) => {
+  const eventElement = e.target.closest(".event"); // Ensure we target the event div
+  if (eventElement) {
+    if (confirm("Are you sure you want to delete this task?")) {
+      const eventTitle = eventElement.querySelector(".event-title").innerText;
+
+      eventsArr.forEach((event, eventIndex) => {
         if (
           event.day === activeDay &&
           event.month === month + 1 &&
           event.year === year
         ) {
-          event.events.forEach((item, index) => {
+          event.events.forEach((item, itemIndex) => {
             if (item.title === eventTitle) {
-              event.events.splice(index, 1);
+              event.events.splice(itemIndex, 1);
             }
           });
-          //if no events left in a day then remove that day from eventsArr
+
+          // Remove the event day if there are no more events left
           if (event.events.length === 0) {
-            eventsArr.splice(eventsArr.indexOf(event), 1);
-            //remove event class from day
+            eventsArr.splice(eventIndex, 1);
+
+            // Remove event styling from calendar day
             const activeDayEl = document.querySelector(".day.active");
-            if (activeDayEl.classList.contains("event")) {
+            if (activeDayEl && activeDayEl.classList.contains("event")) {
               activeDayEl.classList.remove("event");
             }
           }
         }
       });
-      updateEvents(activeDay);
-    }
 
+      updateEvents(activeDay);
+      saveEvents();
+    }
   }
 });
-*/
+
 //function to save events in local storage
 function saveEvents() {
   localStorage.setItem("events", JSON.stringify(eventsArr));
@@ -515,37 +511,3 @@ function markEventCompleted(eventElement) {
     eventElement.style.textDecoration = "none";
   }
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  const eventsContainer = document.querySelector(".events");
-
-  function addEvent(eventName, eventTimeFrom, eventTimeTo) {
-      const eventItem = document.createElement("div");
-      eventItem.classList.add("event-item");
-      eventItem.innerHTML = `
-          <div class="event-info">
-              <span class="event-name">${eventName}</span> 
-              <span class="event-time">${eventTimeFrom} - ${eventTimeTo}</span>
-          </div>
-          <button class="delete-event">X</button>
-      `;
-      eventsContainer.appendChild(eventItem);
-
-      // Add delete functionality
-      eventItem.querySelector(".delete-event").addEventListener("click", function () {
-          eventItem.remove();
-      });
-  }
-
-  // Example: Hook this function to your 'Add Event' button
-  document.querySelector(".add-event-btn").addEventListener("click", function () {
-      const eventName = document.querySelector(".event-name").value;
-      const eventTimeFrom = document.querySelector(".event-time-from").value;
-      const eventTimeTo = document.querySelector(".event-time-to").value;
-
-      if (eventName && eventTimeFrom && eventTimeTo) {
-          addEvent(eventName, eventTimeFrom, eventTimeTo);
-      }
-  });
-});
-

@@ -565,12 +565,61 @@ body {
   cursor: pointer;
   border-radius: 4px;
   font-weight: bold;
+  display: block; /* Ensure it is visible */
 }
 
 .delete-event-btn:hover {
   background-color: darkred;
 }
 
+
 .completed {
   opacity: 0.6;
+}
+
+.event-instruction {
+  background: #fff;
+  color: #333;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  margin: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px; /* Move it to the right */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Space between icon and text */
+  background: #ff7f00; /* Dopaverse Theme Color */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+/* Home Icon Styling */
+.home-btn i {
+  font-size: 18px;
+}
+
+/* Hover Effect */
+.home-btn:hover {
+  background: #e66b00;
+  box-shadow: 0px 6px 15px rgba(255, 127, 0, 0.6);
+}
+
+body{
+  background-color: #f8c470;
 }

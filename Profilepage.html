@@ -4,28 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             height: 100vh;
-            background-color: #f8c470;
+            background: linear-gradient(135deg, #f8c470, #ff9b44);
         }
 
-        /* Same Header as Homepage */
         .header {
             width: 100%;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             background: white;
             padding: 20px 30px;
             box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
@@ -37,35 +37,51 @@
         }
 
         .logo {
-            height: 80px;
+            height: 50px;
         }
 
-        /* Profile & Calendar Icons */
-        .header .icons {
-            margin-left: auto;
+        .header h2 {
+            margin: 0 auto;
+            font-size: 1.5rem;
+            font-weight: 600;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .icons {
             display: flex;
             gap: 20px;
         }
 
         .icons img {
-            height: 50px;
+            height: 40px;
             cursor: pointer;
         }
 
         .profile-container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            font-size: 1.2rem;
-            margin-top: 120px; /* Adjusted to fit new header size */
-        }
+    background: white;
+    padding: 100px; 
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 450px; 
+    text-align: center;
+    flex-grow: 0; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 100px;
+}
 
         .profile-container p {
-            margin: 10px 0;
+            margin: 15px 0;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
         }
 
         .profile-container input, .profile-container select {
@@ -73,7 +89,7 @@
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 1rem;
             display: none;
         }
@@ -83,16 +99,26 @@
             margin-top: 15px;
             padding: 12px;
             border: none;
-            background: #ff7f00; /* Changed button color to match homepage */
+            background: #ff7f00;
             color: white;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 1rem;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
         }
 
         .profile-container button:hover {
             background: #e66b00;
+            transform: scale(1.05);
+        }
+
+        .logout-btn {
+            background: #d9534f;
+            margin-top: 20px;
+        }
+
+        .logout-btn:hover {
+            background: #c9302c;
         }
     </style>
 </head>
@@ -102,21 +128,17 @@
         <a href="Homepage.html">
             <img src="Picture1.jpg" class="logo" alt="DopaVerse Logo">
         </a>
-        
-        <!-- Profile & Calendar Icons -->
+
+        <h2>User Profile</h2>
+
         <div class="icons">
-            <a href="Profilepage.html">
-                <img src="profile.webp" alt="Profile Icon">
-            </a>
-            <a href="index.html">
+            <a href="calender.html">
                 <img src="calender.png" alt="Calendar Icon">
             </a>
         </div>
     </div>
 
     <div class="profile-container">
-        <h2>User Profile</h2>
-        
         <p><strong>Name:</strong> <span id="name-display">John Doe</span></p>
         <input type="text" id="name-input">
 
@@ -138,41 +160,36 @@
 
         <button onclick="editProfile()" id="edit-btn">Edit</button>
         <button onclick="saveProfile()" id="save-btn" style="display: none;">Save</button>
+        <button onclick="logout()" class="logout-btn">Log Out</button>
     </div>
-  
+
     <script>
         function editProfile() {
-            // Show input fields and hide display text
             document.getElementById("name-input").style.display = "block";
             document.getElementById("age-input").style.display = "block";
             document.getElementById("gender-input").style.display = "block";
             document.getElementById("severity-input").style.display = "block";
 
-            // Fill input values with current text values
             document.getElementById("name-input").value = document.getElementById("name-display").innerText;
             document.getElementById("age-input").value = document.getElementById("age-display").innerText;
             document.getElementById("gender-input").value = document.getElementById("gender-display").innerText;
             document.getElementById("severity-input").value = document.getElementById("severity-display").innerText;
 
-            // Hide text and show input fields
             document.getElementById("name-display").style.display = "none";
             document.getElementById("age-display").style.display = "none";
             document.getElementById("gender-display").style.display = "none";
             document.getElementById("severity-display").style.display = "none";
 
-            // Toggle buttons
             document.getElementById("edit-btn").style.display = "none";
             document.getElementById("save-btn").style.display = "block";
         }
 
         function saveProfile() {
-            // Save new values
             document.getElementById("name-display").innerText = document.getElementById("name-input").value;
             document.getElementById("age-display").innerText = document.getElementById("age-input").value;
             document.getElementById("gender-display").innerText = document.getElementById("gender-input").value;
             document.getElementById("severity-display").innerText = document.getElementById("severity-input").value;
 
-            // Hide input fields and show text values
             document.getElementById("name-input").style.display = "none";
             document.getElementById("age-input").style.display = "none";
             document.getElementById("gender-input").style.display = "none";
@@ -183,9 +200,13 @@
             document.getElementById("gender-display").style.display = "inline";
             document.getElementById("severity-display").style.display = "inline";
 
-            // Toggle buttons
             document.getElementById("edit-btn").style.display = "block";
             document.getElementById("save-btn").style.display = "none";
+        }
+
+        function logout() {
+            alert("You have been logged out.");
+            window.location.href = "login.html";
         }
     </script>
 

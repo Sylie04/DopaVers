@@ -515,3 +515,37 @@ function markEventCompleted(eventElement) {
     eventElement.style.textDecoration = "none";
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const eventsContainer = document.querySelector(".events");
+
+  function addEvent(eventName, eventTimeFrom, eventTimeTo) {
+      const eventItem = document.createElement("div");
+      eventItem.classList.add("event-item");
+      eventItem.innerHTML = `
+          <div class="event-info">
+              <span class="event-name">${eventName}</span> 
+              <span class="event-time">${eventTimeFrom} - ${eventTimeTo}</span>
+          </div>
+          <button class="delete-event">X</button>
+      `;
+      eventsContainer.appendChild(eventItem);
+
+      // Add delete functionality
+      eventItem.querySelector(".delete-event").addEventListener("click", function () {
+          eventItem.remove();
+      });
+  }
+
+  // Example: Hook this function to your 'Add Event' button
+  document.querySelector(".add-event-btn").addEventListener("click", function () {
+      const eventName = document.querySelector(".event-name").value;
+      const eventTimeFrom = document.querySelector(".event-time-from").value;
+      const eventTimeTo = document.querySelector(".event-time-to").value;
+
+      if (eventName && eventTimeFrom && eventTimeTo) {
+          addEvent(eventName, eventTimeFrom, eventTimeTo);
+      }
+  });
+});
+

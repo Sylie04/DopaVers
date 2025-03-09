@@ -565,12 +565,26 @@ body {
   cursor: pointer;
   border-radius: 4px;
   font-weight: bold;
+  display: block; /* Ensure it is visible */
 }
 
 .delete-event-btn:hover {
   background-color: darkred;
 }
 
+
 .completed {
   opacity: 0.6;
+}
+
+.event-instruction {
+  background: #fff;
+  color: #333;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  margin: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }

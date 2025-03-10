@@ -1,5 +1,5 @@
 
-# DopaVerse Web Application
+# DopaVerse 
 
 ## Overview
 DopaVerse is a web-based application designed to help users manage their schedules, track events, and play games. The platform includes features such as user authentication, a profile management page, an interactive calendar for event tracking, and a homepage that provides easy navigation to different sections.

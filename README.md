@@ -31,10 +31,5 @@ DopaVerse is a web-based application designed to help users manage their schedul
 - CSS
 - JavaScript
 
-## Future Improvements
-- Backend integration for data persistence.
-- Enhanced user authentication with database storage.
-- Additional gamification features.
-
 
 

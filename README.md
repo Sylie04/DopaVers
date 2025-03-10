@@ -8,7 +8,7 @@ DopaVerse is a web-based application designed to help users manage their schedul
 - **User Authentication**: Users can register and log in via `index.html`.
 - **Profile Page**: Users can view and edit their personal details (`Profilepage.html`).
 - **Homepage**: Central hub with navigation links to different sections (`Homepage.html`).
-- **Calendar**: Interactive event management system for tracking important dates (`calender.html`).
+- **Calendar**: Interactive event management system for tracking important dates and adding tasks (`calender.html`).
 - **Styling**: CSS-based design to enhance UI (`style.css`).
 - **JavaScript Functionality**: Dynamic interactions and event handling (`script.js`).
 

@@ -1,4 +1,4 @@
-# DopaVers
+
 # DopaVerse Web Application
 
 ## Overview

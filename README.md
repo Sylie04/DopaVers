@@ -8,7 +8,6 @@ DopaVerse is a web-based application designed to help users manage their schedul
 - A homepage that provides easy navigation to different sections
 
 ## Features
-- **GitHub Workflows**: Includes `.github/workflows` with a link to the repository hosting the Unity game.
 - **User Authentication**: Users can register and log in (`index.html`).
 - **Profile Page**: Users can view and edit their personal details (`Profilepage.html`).
 - **Homepage**: Central hub with navigation links to different sections (`Homepage.html`).
@@ -18,6 +17,7 @@ DopaVerse is a web-based application designed to help users manage their schedul
 - **JavaScript Functionality**: Dynamic interactions and event handling (`script.js`).
 
 ## File Structure
+- `.github/workflows` - Link to the repository hosting the Unity game.
 - `index.html` - Login and Registration page.
 - `Homepage.html` - Main homepage with navigation buttons.
 - `Profilepage.html` - Displays and allows users to edit their profile information.
@@ -35,10 +35,6 @@ DopaVerse is a web-based application designed to help users manage their schedul
 - **HTML**
 - **CSS**
 - **JavaScript**
-- **Unity** (for the game component)
-
-## Future Improvements
-- Backend integration for data persistence.
-- Enhanced user authentication with database storage.
-- Additional gamification features.
+- **Unity**
+  
 

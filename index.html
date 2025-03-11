@@ -117,6 +117,13 @@
             text-decoration: underline;
         }
 
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
         /* Footer */
         .footer {
             position: fixed;
@@ -137,10 +144,16 @@
 
     <div class="form-container" id="authForm">
         <h2 id="formTitle">Login</h2>
-        <input type="text" id="name" placeholder="Name" style="display: none;" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button onclick="redirectToHome()">Login</button>
+        <input type="text" id="name" placeholder="Name" style="display: none;">
+        <span class="error-message" id="nameError">Name is required</span>
+
+        <input type="email" id="email" placeholder="Email">
+        <span class="error-message" id="emailError">Email is required</span>
+
+        <input type="password" id="password" placeholder="Password">
+        <span class="error-message" id="passwordError">Password must be at least 8 characters, include a number and a special character</span>
+
+        <button onclick="validateForm()">Login</button>
         <p class="toggle-link" onclick="switchForm()">Don't have an account? Register</p>
     </div>
 
@@ -152,12 +165,14 @@
             const button = document.querySelector(".form-container button");
             const toggleText = document.querySelector(".toggle-link");
             const nameField = document.getElementById("name");
+            const nameError = document.getElementById("nameError");
 
             if (formTitle.innerText === "Login") {
                 formTitle.innerText = "Register";
                 button.innerText = "Register";
                 toggleText.innerText = "Already have an account? Login";
                 nameField.style.display = "block";
+                nameError.style.display = "none";
             } else {
                 formTitle.innerText = "Login";
                 button.innerText = "Login";
@@ -166,8 +181,43 @@
             }
         }
 
-        function redirectToHome() {
-            window.location.href = "homePage.html";
+        function validateForm() {
+            let isValid = true;
+
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+
+            const nameError = document.getElementById("nameError");
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+
+            nameError.style.display = "none";
+            emailError.style.display = "none";
+            passwordError.style.display = "none";
+
+            if (name.style.display !== "none" && name.value.trim() === "") {
+                nameError.style.display = "block";
+                isValid = false;
+            }
+
+            if (email.value.trim() === "") {
+                emailError.style.display = "block";
+                isValid = false;
+            }
+
+            const passwordValue = password.value;
+            const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+            if (!passwordRegex.test(passwordValue)) {
+                passwordError.style.display = "block";
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Form submitted successfully!");
+                window.location.href = "homePage.html";
+            }
         }
     </script>
 </body>

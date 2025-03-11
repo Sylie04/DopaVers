@@ -57,7 +57,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px; /* Space between buttons and video */
+            gap: 20px;
             width: 100%;
             margin-top: 120px;
         }
@@ -70,7 +70,7 @@
             gap: 15px;
         }
 
-        /* Play Game Button (With Fun Hover Effect) */
+        /* Play Game Button */
         .play-game {
             width: 200px;
             height: 200px;
@@ -89,11 +89,10 @@
             text-decoration: none;
         }
 
-        /* Dynamic Hover Effects */
         .play-game:hover {
-            transform: scale(1.1) rotate(3deg); /* Grows & Slight Rotation */
+            transform: scale(1.1) rotate(3deg);
             background-color: #e66b00;
-            box-shadow: 0px 6px 15px rgba(255, 127, 0, 0.6); /* Glow effect */
+            box-shadow: 0px 6px 15px rgba(255, 127, 0, 0.6);
             animation: bounce 0.5s infinite alternate ease-in-out;
         }
 
@@ -131,7 +130,7 @@
             display: none;
             position: absolute;
             top: 50%;
-            left: calc(50% + 180px); /* Places it next to the calendar button */
+            left: calc(50% + 180px);
             transform: translateY(-50%);
             width: 400px;
             height: 250px;
@@ -168,26 +167,41 @@
         <!-- Buttons Section -->
         <div class="buttons-container">
             <a href="https://lujain4l.github.io/DopaVerseGame/" class="play-game">Play Game</a>
-            <button class="view-demo" onmouseover="showVideo()" onmouseleave="hideVideo()">View Demo</button>
+            <button class="view-demo" onmouseover="playVideo()" onmouseleave="stopVideo()">View Demo</button>
         </div>
 
         <!-- Video Section (Appears on Hover) -->
         <div class="video-container" id="videoBox">
             <iframe 
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                title="Demo Video" 
+                id="videoFrame"
+                title="Demo Video"
+                allow="autoplay; encrypted-media"
                 allowfullscreen>
             </iframe>
         </div>
     </div>
 
     <script>
-        function showVideo() {
-            document.getElementById("videoBox").style.display = "block";
+        function playVideo() {
+            var videoBox = document.getElementById("videoBox");
+            var videoFrame = document.getElementById("videoFrame");
+            
+            // Set the embed URL with autoplay & mute
+            videoFrame.src = "https://www.youtube.com/embed/f8QWuVdILDE?autoplay=1&mute=1";
+
+            // Show video container
+            videoBox.style.display = "block";
         }
 
-        function hideVideo() {
-            document.getElementById("videoBox").style.display = "none";
+        function stopVideo() {
+            var videoBox = document.getElementById("videoBox");
+            var videoFrame = document.getElementById("videoFrame");
+
+            // Stop video by removing the src
+            videoFrame.src = "";
+
+            // Hide video container
+            videoBox.style.display = "none";
         }
     </script>
 
